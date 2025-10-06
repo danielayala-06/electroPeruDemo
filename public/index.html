@@ -21,7 +21,7 @@
     <main class="container my-3">
       <h3>Mantenimiento de productos</h3>
 
-      <form action="" class="" method="post">
+      <form action="" class="" method="post" id="form-producto">
         <div class="card">
           <div class="card-header">
             <strong>Complete los datos solicitados</strong>
@@ -93,6 +93,15 @@
         <!-- Fin del card -->
       </form>
 
+      <style>
+        .table tbody tr td:nth-child(4){ text-align: right;}
+
+        .table tbody tr 
+        td:nth-child(1), 
+        td:nth-child(3), 
+        td:nth-child(5){ text-align: center;}
+      </style>
+
       <div class="table-responsive mt-3">
         <table class="table table-bordered" id="tabla-productos">
             <colgroup>
@@ -120,7 +129,56 @@
     <footer></footer>
 
     <script>
+        const API_URL = 'http://localhost:3000/api/productos'
+        const formulario = document.getElementById('form-producto')
+        const tabla = document.querySelector('#tabla-productos tbody')
         
+        //Obtener los datos (backend)
+
+        async function obtnerProductos(){
+            const res = await fetch(API_URL, {method:'get'});
+            const productos = await res.json()
+            console.log(productos)
+            
+            //Creamos una nueva final y celdas con los datos contenidos en JSON
+            tabla.innerHTML = '';
+
+            productos.forEach(producto => {
+                //Crea una nueva fila y celdas con los datos contenidos en JSON
+                const row = tabla.insertRow()
+
+                row.insertCell().textContent = producto.id
+                row.insertCell().textContent = producto.descripcion
+                row.insertCell().textContent = producto.garantia
+                row.insertCell().textContent = producto.precio
+                row.insertCell().textContent = ''
+
+                //La ultima celda contendrá 2 botones (funcionalidad)
+                const actionCell = row.insertCell()
+                
+                //Botón 1: Editar
+                const editButton = document.createElement('button')
+                editButton.textContent = 'Editar'
+                editButton.classList.add('btn')
+                editButton.classList.add('btn-info')
+                editButton.onclick = ()=>cargarParaEdicion(producto)
+
+                //Botón 2: Eliminar
+                const deleteButton = document.createElement('button')
+                deleteButton.textContent= 'Eliminar'
+                deleteButton.classList.add('btn')
+                deleteButton.classList.add('btn-danger')
+                deleteButton.onclick = ()=> eliminarProducto(producto.id, producto.descripcion)
+
+                //Agregamos ambos botones a la última celda
+                actionCell.appendChild(editButton)
+                actionCell.appendChild(deleteButton)
+            });
+            
+            
+        }
+        //Cuando la pagína este lista, se ejecutara el obtener productos
+        document.addEventListener("DOMContentLoaded", obtnerProductos);
     </script>
   </body>
 </html>
