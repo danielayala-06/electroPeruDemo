@@ -46,8 +46,9 @@ exports.obtenerProductos = async (req, res) => {
 
        //3. Deserialización - PRIMER VALOR DEL ARREGLO
         const [productos] = await db.query(sql)
+        
         //4. Enviamos la respuesta.
-        res.status(200).json({productos})
+        res.status(200).json(productos)
     }catch(e){
         console.log(e)
         console.error(e)
