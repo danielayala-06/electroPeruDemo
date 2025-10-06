@@ -6,6 +6,7 @@ const path = require('path') //Express servir el Front-End
 
 
 const productoRoutes = require('./routes/productoRoutes')
+const tiendaRoutes = require('./routes/tiendaRoutes')//Asignamos a un objeto el enrutador
 
 const app = express()
 const PORT = process.env.PORT || 3000 //Puerto de la aplicación
@@ -29,6 +30,7 @@ app.use(express.json())
 
 //Rutas
 app.use('/api/productos', productoRoutes)
+app.use('/api/tiendas', tiendaRoutes)
 
 //Iniciar el servidor
 app.listen(PORT, ()=>{
