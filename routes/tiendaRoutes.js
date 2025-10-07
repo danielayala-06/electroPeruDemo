@@ -5,10 +5,10 @@ const router = express.Router()//Enrutador
 const tiendaController = require('../controllers/tiendaController')
 
 //Definimos las rutas
-//router.post('/', productoContoller.crearProducto);
 router.get('/', tiendaController.obtenerTiendas);
-//router.get('/:id', productoContoller.obtenerProductosPorId);
-//router.put('/:id', productoContoller.actualizarProducto);
-//router.delete('/:id', productoContoller.eliminarProducto);
+router.post('/', tiendaController.createTienda);
+router.put('/:id', tiendaController.editTienda);
+router.get('/:id', tiendaController.serchById);
+router.delete('/:id', tiendaController.deleteTienda);
 
 module.exports = router 
