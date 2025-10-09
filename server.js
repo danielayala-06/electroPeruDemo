@@ -24,6 +24,10 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.get('/', (req, res)=>{
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
 }) 
+//Ruta para los clientes
+app.get('/clientes', (req, res)=>{
+    res.sendFile(path.join(__dirname, 'public', 'clientes.html'))
+}) 
 
 //Comunicación se realizará JSON
 app.use(express.json())
