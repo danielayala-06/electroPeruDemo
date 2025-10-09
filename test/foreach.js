@@ -5,6 +5,14 @@ const data = [
 ]
 
 data.forEach(e => {
-    console.log(e.nombre)    
+    //console.log(e.nombre)    
 });
+
+const value = {
+    "nombre": "Daniel",
+    "apellido": "Ayala"
+}
+
+console.log(Object.keys(value))
+
 

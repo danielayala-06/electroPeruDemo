@@ -88,7 +88,7 @@ exports.actualizarProducto = async(req, res) =>{
     //Necesitamos un parámetro
     const {id} = req.params
 
-    //Leer un JSOn body
+    //Leer un JSON body
     const {descripcion, garantia, precio} = req.body
     
     //Validación => Es obligatorio que al menos uno tenga datos
